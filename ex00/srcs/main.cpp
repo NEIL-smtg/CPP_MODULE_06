@@ -6,16 +6,20 @@
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 19:51:07 by suchua            #+#    #+#             */
-/*   Updated: 2023/07/09 19:51:40 by suchua           ###   ########.fr       */
+/*   Updated: 2023/08/23 04:08:53 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-int	main()
+int	main(int ac, char **av)
 {
+	(void) av;
+	if (ac != 2)
 	{
-		ScalarConverter::convert("42.0f");
+		std::cout << "Incorect number of arguments\n";
+		return (1);
 	}
+	ScalarConverter::convert(av[1]);
 	return (0);
 }
