@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
+/*   By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 19:51:01 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/23 05:27:57 by suchua           ###   ########.fr       */
+/*   Updated: 2023/08/23 19:57:39 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,69 +25,111 @@ void	print_char(char *s)
 		std::cout << "\'" << (char) n << "\'" << std::endl;
 }
 
-void	print_int(char *s)
+void	print_int(const std::string& s)
 {
-	const int	n = atoi(s);
-
 	std::cout << "int: ";
-	if (*s < '0' || *s > '9')
-		std::cout << "impossible" << std::endl;
-	else
+	try
+	{
+		const int	n = std::stoi(s);
+
 		std::cout << n << std::endl;
+	}
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
+	catch(const std::out_of_range& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
 }
 
-void	print_float(char *s)
+void	print_float(const std::string& s)
 {
-	const float	n = atof(s);
-	int			len = 1;
-	
 	std::cout << "float: ";
-	if (std::isnan(n))
-		std::cout << n << "f" << std::endl;
-	else if ((*s >= '0' && *s <= '9'))
+	try
 	{
-		if (strchr(s, '.'))
-		{
-			int back = (int) strlen(strchr(s, '.') + 1);
-			int front = (int) strlen(s) - back;
-			if (front + back > 8)
-				len = 8 - front;
-			else
-				len = back;
-		}
-		std::cout << std::fixed << std::setprecision(len) << n << "f" << std::endl;
+		const float	n = std::stof(s);
+		if (s.length() < 7 && s.find('.') == std::string::npos)
+			std::cout << std::fixed << std::setprecision(1) << n << "f" << std::endl;
+		else
+			std::cout << n << "f" << std::endl;
 	}
-	else
-		std::cout << "impossible" << std::endl;
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
+	catch(const std::out_of_range& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
 }
 
-void	print_double(char *s)
+void	print_double(const std::string& s)
 {
-	const double	n = atof(s);
-	int				len = 1;
-	
 	std::cout << "double: ";
-	if (std::isnan(n))
-		std::cout << n << std::endl;
-	else if ((*s >= '0' && *s <= '9'))
+	try
 	{
-		if (strchr(s, '.'))
-		{
-			int back = (int) strlen(strchr(s, '.') + 1);
-			int front = (int) strlen(s) - back;
-			if (front + back > 16)
-				len = 16 - front;
-			else
-				len = back;
-		}
-		std::cout << std::fixed << std::setprecision(len) << n << std::endl;
+		const double	n = std::stof(s);
+
+		std::cout << n << std::endl;
 	}
-	else
-		std::cout << "impossible" << std::endl;
+	catch(const std::invalid_argument& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
+	catch(const std::out_of_range& e)
+	{
+		std::cerr << "impossible" << '\n';
+	}
+}
+
+bool	is_pseudo(char *s)
+{
+	if (!strncmp(s, "nan", 4) || !strncmp(s, "nanf", 5))
+		return (true);
+	if (!strncmp(s, "inf", 4) || !strncmp(s, "inff", 5))
+		return (true);
+	if (!strncmp(s, "-inf", 5) || !strncmp(s, "-inff", 6))
+		return (true);
+	if (!strncmp(s, "+inf", 5) || !strncmp(s, "+inff", 6))
+		return (true);
+	return (false);
+}
+
+bool	valid_str(char *s)
+{
+	if (is_pseudo(s))
+		return (true);
+
+	int	dot = 0;
+	int	j = 0;
+
+	while (s[j] == '+' || s[j] == '-')
+		++j;
+	if (j > 1)
+		return (false);
+	for (int i = j; s[i]; i++)
+	{
+		if (s[i] == '.')
+			dot++;
+		if (s[i] == '.' && !s[i + 1])
+			return (false);
+		if (dot > 1)
+			return (false);
+		if (s[i] != '.' && s[i] != 'f' && (s[i] < '0' || s[i] > '9'))
+			return (false);
+	}
+	return (true);
 }
 
 void	ScalarConverter::convert(char *s)
 {
+	if (!valid_str(s))
+	{
+		std::cerr << "Invalid argument" << std::endl;
+		return ;
+	}
 	print_char(s);
 	print_int(s);
 	print_float(s);
