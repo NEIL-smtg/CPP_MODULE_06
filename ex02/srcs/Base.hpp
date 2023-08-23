@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 01:40:14 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/24 01:40:20 by suchua           ###   ########.fr       */
+/*   Created: 2023/08/24 01:42:36 by suchua            #+#    #+#             */
+/*   Updated: 2023/08/24 01:44:03 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#ifndef BASE_HPP
+# define BASE_HPP
 
-Data::Data(int num)
-{
-	this->num = num;
-}
+# include <iostream>
 
-Data::~Data()
+class Base
 {
-}
+	public:
+		virtual ~Base();
+};
 
-Data::Data(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-}
-
-Data&	Data::operator=(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-	return *this;
-}
-
-int	Data::getNum() const
-{
-	return this->num;	
-}
+#endif

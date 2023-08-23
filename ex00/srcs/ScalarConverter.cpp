@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suchua <suchua@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 19:51:01 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/23 19:57:39 by suchua           ###   ########.fr       */
+/*   Updated: 2023/08/24 00:50:43 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_char(char *s)
 	else if (n < 32 || n > 126)
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << "\'" << (char) n << "\'" << std::endl;
+		std::cout << "\'" << static_cast<char>(n) << "\'" << std::endl;
 }
 
 void	print_int(const std::string& s)
@@ -70,7 +70,7 @@ void	print_double(const std::string& s)
 	std::cout << "double: ";
 	try
 	{
-		const double	n = std::stof(s);
+		const double	n = std::stod(s);
 
 		std::cout << n << std::endl;
 	}

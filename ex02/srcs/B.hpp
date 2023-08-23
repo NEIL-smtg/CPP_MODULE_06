@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 01:40:14 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/24 01:40:20 by suchua           ###   ########.fr       */
+/*   Created: 2023/08/24 01:45:49 by suchua            #+#    #+#             */
+/*   Updated: 2023/08/24 02:02:52 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#ifndef B_HPP
+# define B_HPP
 
-Data::Data(int num)
-{
-	this->num = num;
-}
+# include "Base.hpp"
 
-Data::~Data()
+class B : public Base
 {
-}
+	private:
+		char	type;
+	public:
+		B();
+		virtual ~B();
+		void	print_self(void) const;
+		char	getType(void) const;
+};
 
-Data::Data(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-}
-
-Data&	Data::operator=(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-	return *this;
-}
-
-int	Data::getNum() const
-{
-	return this->num;	
-}
+#endif

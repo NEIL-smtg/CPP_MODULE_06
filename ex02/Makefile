@@ -1,5 +1,5 @@
-NAME            =       serializer
-FILES           =       main Serializer Data
+NAME            =       base
+FILES           =       main A B C Base
 SRCS_DIR        =       srcs/
 OBJS_DIR        =       objs/
 SRCS            =       $(addprefix $(SRCS_DIR), $(addsuffix .cpp, $(FILES)))
@@ -7,7 +7,7 @@ OBJS            =       $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 CPP             =       c++
 CFLAGS          =       -Wall -Werror -Wextra -std=c++98 -pedantic
 RM             	=       rm -rf
-FSAN            =       -fsanitize=adrress -g3
+FSAN            =       -fsanitize=address -g3
 
 all:
 	mkdir -p $(OBJS_DIR)

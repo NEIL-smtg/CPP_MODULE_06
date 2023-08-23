@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 01:40:14 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/24 01:40:20 by suchua           ###   ########.fr       */
+/*   Created: 2023/08/23 18:04:23 by suchua            #+#    #+#             */
+/*   Updated: 2023/08/24 01:39:59 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
-Data::Data(int num)
-{
-	this->num = num;
-}
+# include <iostream>
+# include <stdint.h>
+# include "Data.hpp"
 
-Data::~Data()
+class Serializer
 {
-}
+	public:
+		static uintptr_t	serialize(Data *ptr);
+		static Data			*deserialize(uintptr_t raw);
+};
 
-Data::Data(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-}
-
-Data&	Data::operator=(const Data& other)
-{
-	if (this != &other)
-		this->num = other.num;
-	return *this;
-}
-
-int	Data::getNum() const
-{
-	return this->num;	
-}
+#endif

@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   A.cpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suchua < suchua@student.42kl.edu.my>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 01:40:14 by suchua            #+#    #+#             */
-/*   Updated: 2023/08/24 01:40:20 by suchua           ###   ########.fr       */
+/*   Created: 2023/08/24 01:59:45 by suchua            #+#    #+#             */
+/*   Updated: 2023/08/24 02:04:03 by suchua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#include "A.hpp"
+#include <iostream>
 
-Data::Data(int num)
+A::A()
 {
-	this->num = num;
+	this->type = 'A';
 }
 
-Data::~Data()
+A::~A()
 {
 }
 
-Data::Data(const Data& other)
+void	A::print_self(void) const
 {
-	if (this != &other)
-		this->num = other.num;
+	std::cout << "I am " << this->type << std::endl;
 }
 
-Data&	Data::operator=(const Data& other)
+char	A::getType(void) const
 {
-	if (this != &other)
-		this->num = other.num;
-	return *this;
-}
-
-int	Data::getNum() const
-{
-	return this->num;	
+	return this->type;
 }
